@@ -3,7 +3,7 @@
     import { ref, onMounted } from 'vue';
     import dayjs from 'dayjs';
     import CurrencyDisplay from '../Components/CurrencyDisplay.vue';
-    import { ShoppingCartCheck02Icon } from 'hugeicons-vue';
+    import { ShoppingCartCheck02Icon, DeliveryBox01Icon, MoneyReceive02Icon, UserMultipleIcon } from 'hugeicons-vue';
 
     const orders = ref([]);
     const queryDate = ref();
@@ -45,16 +45,19 @@
             <ShoppingCartCheck02Icon class="absolute -left-2 -bottom-4 text-lime-500 opacity-30" size="100" />
             <p class="text-right font-bold text-6xl z-10">50</p>
         </div>
-        <div class="bg-amber-100 rounded-xl p-4 shadow-brutal shadow-amber-300">
+        <div class="bg-amber-100 rounded-xl p-4 shadow-brutal shadow-amber-300 relative overflow-hidden">
             <h3 class="text-xl">Products</h3>
+            <DeliveryBox01Icon class="absolute -left-2 -bottom-4 text-amber-500 opacity-30" size="100" />
             <p class="text-right font-bold text-6xl">20</p>
         </div>
-        <div class="bg-cyan-100 rounded-xl p-4 shadow-brutal shadow-cyan-300">
+        <div class="bg-cyan-100 rounded-xl p-4 shadow-brutal shadow-cyan-300 relative overflow-hidden">
             <h3 class="text-xl">Income</h3>
+            <MoneyReceive02Icon class="absolute -left-2 -bottom-4 text-cyan-500 opacity-30" size="100" />
             <p class="text-right font-bold text-6xl">2.35M</p>
         </div>
-        <div class="bg-purple-100 rounded-xl p-4 shadow-brutal shadow-purple-300">
+        <div class="bg-purple-100 rounded-xl p-4 shadow-brutal shadow-purple-300 relative overflow-hidden">
             <h3 class="text-xl">Customers</h3>
+            <UserMultipleIcon class="absolute -left-2 -bottom-4 text-purple-500 opacity-30" size="100" />
             <p class="text-right font-bold text-6xl">1.2k</p>
         </div>
     </div>
