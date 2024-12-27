@@ -18,6 +18,8 @@
     "dependencies": {
         "dayjs": "^1.11.13",
         "hugeicons-vue": "^0.0.1",
+        "nprogress": "^0.2.0",
+        "sweetalert2": "^11.15.3",
         "vue-router": "^4.5.0"
     }
 }

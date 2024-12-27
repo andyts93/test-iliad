@@ -25,4 +25,18 @@ class OrderController extends Controller
         
         return response()->json($qb->paginate(15));
     }
+
+    public function show(Order $order)
+    {
+        $order->load(['products']);
+        
+        return response()->json($order);
+    }
+
+    public function destroy(Order $order)
+    {
+        $order->delete();
+
+        return response()->json(null);
+    }
 }

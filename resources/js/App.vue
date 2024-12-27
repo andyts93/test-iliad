@@ -3,7 +3,7 @@
         <div class="bg-slate-800 mb-2 text-white p-4">
             <a href="/">LOGO</a>
             <ul>
-                <li>Orders</li>
+                <li><router-link to="/">Orders</router-link></li>
             </ul>
         </div>
         <div class="container mx-auto bg-white rounded-3xl p-4 my-2">

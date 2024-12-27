@@ -81,12 +81,12 @@
                     <span class="bg-black p-2 text-white block text-center">#{{ order.id }}</span>
                 </td>
                 <td class="p-2">
-                    <p class="font-bold">{{ order.name }}</p>
+                    <router-link :to="`/orders/${order.id}`"><p class="font-bold">{{ order.name }}</p></router-link>
                     <p class="text-gray-500">{{ order.description }}</p>
                 </td>
                 <td class="p-2">{{ dayjs(order.date).format('DD/MM/YYYY') }}</td>
                 <td class="p-2 font-bold text-right">
-                    <CurrencyDisplay :value="order.products_sum_price" />
+                    <CurrencyDisplay :value="order.products_sum_price" :is-plain="true" />
                 </td>
             </tr> 
         </tbody>
