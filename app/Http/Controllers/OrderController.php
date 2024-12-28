@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -38,5 +41,57 @@ class OrderController extends Controller
         $order->delete();
 
         return response()->json(null);
+    }
+
+    public function addProduct(Order $order, Product $product)
+    {
+        if ($order->products()->find($product->id)) {
+            return response()->json([
+                'error' => 'You can\'t add the same product twice',
+            ]);
+        }
+
+        $order->products()->attach($product->id);
+
+        return response()->json([
+            'message' => 'Product added successfully'
+        ]); 
+    }
+
+    public function removeProduct(Order $order, Product $product)
+    {
+        if ($order->products()->count() <= 1) {
+            return response()->json([
+                'error' => 'An order must have at least 1 product',
+            ], 400);
+        }
+        $order->products()->detach($product->id);
+
+        return response()->json([
+            'message' => 'Product removed successfully'
+        ]);
+    }
+
+    public function update(Request $request, Order $order)
+    {
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'description' => 'required',
+        ]);
+
+        try {
+            $order->update($validated);
+            return response()->json([
+                'message' => 'Order updated',
+            ]);
+        } catch (\Exception $e) {
+            Log::critical('Unexpected error during order update.', [
+                'exception' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+            return response()->json([
+                'error' => 'An error occured',
+            ], 500);
+        }
     }
 }

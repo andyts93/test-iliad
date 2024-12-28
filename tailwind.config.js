@@ -16,10 +16,13 @@ export default {
             },
             boxShadow: {
                 "brutal": "4px 4px 0px",
-                "brutal-sm": "2px 2px 0px",
+                "brutal-sm": "3px 3px 0px",
                 "brutal-md": "6px 6px 0px",
                 "brutal-lg": "8px 8px 0px"
-              }
+            },
+            animation: {
+                'spin-slow': 'spin 2s linear infinite',
+            }
         },
     },
     plugins: [],
