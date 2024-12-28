@@ -2,7 +2,7 @@
     import axios from 'axios';
     import { ref, onMounted } from 'vue';
     import dayjs from 'dayjs';
-    import CurrencyDisplay from '../Components/CurrencyDisplay.vue';
+    import CurrencyDisplay from '../../Components/CurrencyDisplay.vue';
     import { ShoppingCartCheck02Icon, DeliveryBox01Icon, MoneyReceive02Icon, UserMultipleIcon } from 'hugeicons-vue';
 
     const orders = ref([]);
@@ -86,7 +86,7 @@
                 </td>
                 <td class="p-2">{{ dayjs(order.date).format('DD/MM/YYYY') }}</td>
                 <td class="p-2 font-bold text-right">
-                    <CurrencyDisplay :value="order.products_sum_price" :is-plain="true" />
+                    <CurrencyDisplay :value="order.products_sum_price / 100" :is-plain="true" />
                 </td>
             </tr> 
         </tbody>

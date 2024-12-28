@@ -1,9 +1,5 @@
 <script setup>
-const props = defineProps(['value', 'isPlain'])
-
-if (props.isPlain) {
-    props.value /= 100;
-}
+const props = defineProps(['value']);
 </script>
 
 <template>

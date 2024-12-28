@@ -2,9 +2,9 @@
     import dayjs from 'dayjs';
     import { onMounted, ref } from 'vue';
     import { useRoute, useRouter } from 'vue-router';
-    import CurrencyDisplay from '../Components/CurrencyDisplay.vue';
     import { BorderFullIcon, Timer02Icon, Edit02Icon, Delete01Icon } from 'hugeicons-vue';
     import Swal from 'sweetalert2';
+    import ProductsTable from '../../Components/Order/ProductsTable.vue';
 
     const route = useRoute();
     const router = useRouter();
@@ -53,9 +53,9 @@
             <h1 class="font-bold text-3xl">Order #{{ order.id }}</h1>
             <p>Created on <span class="font-semibold">{{ dayjs(order.date).format('DD MMM YYYY HH:mm:ss') }}</span></p>
             <div class="flex gap-2">
-                <button class="rounded-md bg-gray-200 p-2 hover:bg-gray-500 hover:text-white transition-colors duration-300">
+                <router-link :to="`/orders/${order.id}/edit`" class="rounded-md bg-gray-200 p-2 hover:bg-gray-500 hover:text-white transition-colors duration-300">
                     <Edit02Icon />
-                </button>
+                </router-link>
                 <button class="rounded-md bg-red-300 p-2 hover:bg-red-500 hover:text-white transition-colors duration-300" @click="deleteOrder">
                     <Delete01Icon />
                 </button>
@@ -104,30 +104,6 @@
                 </ol>
             </div>
         </div>
-        <table class="w-full">
-            <thead>
-                <tr>
-                    <th class="text-left">Product</th>
-                    <th class="text-right">Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="product in order.products" :key="product.id">
-                    <td class="py-2">
-                        <div class="flex items-center gap-8">
-                            <img :src="`https://picsum.photos/seed/${product.id}/80`" class="rounded-lg" />
-                            <p class="uppercase">{{ product.name }}</p>
-                        </div>
-                    </td>
-                    <td class="text-right"><currency-display :value="product.price" /></td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th></th>
-                    <td colspan="2" class="border-t pt-2 text-right font-bold text-xl"><currency-display :value="order.products.reduce((prev, curr) => prev + curr.price, 0)" /></td>
-                </tr>
-            </tfoot>
-        </table>
+        <ProductsTable :products="order.products" />
     </div>
 </template>
