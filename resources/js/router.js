@@ -12,6 +12,10 @@ const routes = [
     {
         path: '/orders/:id/edit',
         component: () => import('./Pages/Orders/EditOrder.vue'),
+    },
+    {
+        path: '/not-found',
+        component: () => import('./Pages/NotFound.vue'),
     }
 ];
 

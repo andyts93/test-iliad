@@ -36,6 +36,11 @@
     onMounted(() => {
         getOrder(Number(route.params.id))
             .then(response => order.value = response.data)
+            .catch(err => {
+                if(err.response.status === 404) {
+                    router.replace('/not-found');
+                }
+            })
             .finally(() => loading.value = false);
     });
 </script>
