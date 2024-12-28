@@ -6,11 +6,12 @@ import { BorderFullIcon } from 'hugeicons-vue';
 import ProductsTable from '../../Components/Order/ProductsTable.vue';
 import { toast } from 'vue3-toastify';
 import ProductAutocomplete from '../../Components/ProductAutocomplete.vue';
-import History from '../../Components/Order/History.vue';
-import Card from '../../Components/Card.vue';
+import History from '../../Components/Order/OrderHistory.vue';
+import Card from '../../Components/CardDefault.vue';
 import { addProductOrder, getOrder, updateOrder } from '../../api/orders';
 import Order from '../../interfaces/Order';
 import SkeletonLoader from '../../Components/SkeletonLoader.vue';
+import OrderHeader from '../../Components/Order/OrderHeader.vue';
 
 const route = useRoute();
 const loading = ref(true);
@@ -57,10 +58,7 @@ watch(searchedProduct, newVal => {
         </div>
     </div>
     <div v-else>
-        <div class="flex items-center justify-between mb-2 gap-4">
-            <h1 class="font-bold text-xl lg:text-3xl">Order #{{ order.id }}</h1>
-            <p class="text-right text-xs lg:text-base">Created on <span class="font-semibold">{{ dayjs(order.date).format('DD MMM YYYY HH:mm:ss') }}</span></p>
-        </div>
+        <OrderHeader :order="order" />
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 mb-4">
             <Card title="Details">
                 <template v-slot:icon>

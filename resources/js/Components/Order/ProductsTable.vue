@@ -3,7 +3,6 @@ import CurrencyDisplay from '../../Components/CurrencyDisplay.vue';
 import {  Delete01Icon } from 'hugeicons-vue';
 import Product from '../../interfaces/Product';
 import Order from '../../interfaces/Order';
-import axios from 'axios';
 import { toast } from 'vue3-toastify';
 import Swal from 'sweetalert2';
 import { removeProductOrder } from '../../api/orders';
@@ -56,7 +55,7 @@ const deleteProduct = async (product: Product) => {
                     <td class="py-2">
                         <div class="flex items-center gap-4 lg:gap-8">
                             <img :src="`https://picsum.photos/seed/${product.id}/80`" class="rounded-lg" :alt="product.name" />
-                            <p class="uppercase">{{ product.name }}</p>
+                            <p class="uppercase font-semibold">{{ product.name }}</p>
                         </div>
                     </td>
                     <td class="text-right"><currency-display :value="product.price" /></td>

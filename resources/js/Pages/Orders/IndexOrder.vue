@@ -67,10 +67,12 @@
     </form>
     <table class="w-full">
         <thead>
-            <th class="text-left p-2">ID</th>
-            <th class="text-left p-2">Name</th>
-            <th class="text-left p-2">Date</th>
-            <th class="text-right p-2">Price</th>
+            <tr class="sr-only md:not-sr-only">
+                <th class="text-left p-2">ID</th>
+                <th class="text-left p-2">Name</th>
+                <th class="text-left p-2">Date</th>
+                <th class="text-right p-2">Price</th>
+            </tr>
         </thead>
         <tbody>
             <template v-if="loading">
@@ -89,7 +91,7 @@
                     </td>
                 </tr>
             </template>
-            <tr v-else v-for="order in orders.data" :key="order.id">
+            <tr v-else v-for="order in orders.data" :key="order.id" class="flex flex-col mb-4 sm:table-row">
                 <td class="p-2">
                     <span class="bg-black p-2 text-white block text-center">#{{ order.id }}</span>
                 </td>

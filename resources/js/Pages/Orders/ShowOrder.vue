@@ -1,14 +1,14 @@
 <script setup lang="ts">
-    import dayjs from 'dayjs';
     import { onMounted, ref } from 'vue';
     import { useRoute, useRouter } from 'vue-router';
     import { BorderFullIcon, Edit02Icon, Delete01Icon } from 'hugeicons-vue';
     import Swal from 'sweetalert2';
     import ProductsTable from '../../Components/Order/ProductsTable.vue';
-    import History from '../../Components/Order/History.vue';
-    import Card from '../../Components/Card.vue';
+    import History from '../../Components/Order/OrderHistory.vue';
+    import Card from '../../Components/CardDefault.vue';
     import { getOrder, deleteOrder } from '../../api/orders';
-import SkeletonLoader from '../../Components/SkeletonLoader.vue';
+    import SkeletonLoader from '../../Components/SkeletonLoader.vue';
+    import OrderHeader from '../../Components/Order/OrderHeader.vue';
 
     const route = useRoute();
     const router = useRouter();
@@ -51,10 +51,7 @@ import SkeletonLoader from '../../Components/SkeletonLoader.vue';
         </div>
     </div>
     <div v-else>
-        <div class="flex items-center justify-between mb-2 gap-4">
-            <h1 class="font-bold text-xl lg:text-3xl">Order #{{ order.id }}</h1>
-            <p class="text-right text-xs lg:text-base">Created on <span class="font-semibold">{{ dayjs(order.date).format('DD MMM YYYY HH:mm:ss') }}</span></p>
-        </div>
+        <OrderHeader :order="order" />
         <div class="flex justify-end gap-2 mb-4">
             <router-link :to="`/orders/${order.id}/edit`" class="rounded-md bg-gray-200 p-2 hover:bg-gray-500 hover:text-white transition-colors duration-300">
                 <Edit02Icon />
@@ -71,11 +68,11 @@ import SkeletonLoader from '../../Components/SkeletonLoader.vue';
                 <template v-slot:body>
                     <table class="w-full">
                         <tbody>
-                            <tr>
+                            <tr class="flex flex-col mb-4 sm:table-row">
                                 <th class="text-left align-top pr-6 font-semibold">Name</th>
                                 <td class="text-right font-light">{{ order.name }}</td>
                             </tr>
-                            <tr>
+                            <tr class="flex flex-col mb-4 sm:table-row">
                                 <th class="text-left align-top pr-6 font-semibold">Description</th>
                                 <td class="text-right font-light italic">{{ order.description }}</td>
                             </tr>

@@ -30,6 +30,7 @@ const searchProduct = async () => {
 
         products.value = response.data;
         resultsOpen.value = true;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
         error.value = 'Something went wrong';
     } finally {

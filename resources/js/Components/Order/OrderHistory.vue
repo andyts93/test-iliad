@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import dayjs from 'dayjs';
 import Order from '../../interfaces/Order';
-import Card from '../Card.vue';
+import Card from '../CardDefault.vue';
 import { Timer02Icon } from 'hugeicons-vue';
 
 defineProps<{
