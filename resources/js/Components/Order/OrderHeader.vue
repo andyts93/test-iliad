@@ -16,7 +16,7 @@ const back = () => router.back();
 <template>
     <div class="flex flex-col md:flex-row md:items-center justify-between mb-2 gap-4">
         <div class="flex items-center gap-2">
-            <button class="rounded-md bg-gray-200 p-2 hover:bg-gray-500 hover:text-white transition-colors duration-300" @click="back">
+            <button class="rounded-md bg-gray-200 p-2 hover:bg-gray-500 hover:text-white transition-colors duration-300" @click="back" title="Go back">
                 <ArrowLeft01Icon />
             </button>
             <h1 class="font-bold text-xl lg:text-3xl">Order #{{ order?.id }}</h1>

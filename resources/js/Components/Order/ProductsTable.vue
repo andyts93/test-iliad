@@ -54,7 +54,7 @@ const deleteProduct = async (product: Product) => {
                 <tr v-for="product in products" :key="product.id" class="flex flex-col mb-4 sm:table-row">
                     <td class="py-2">
                         <div class="flex items-center gap-4 lg:gap-8">
-                            <img :src="`https://picsum.photos/seed/${product.id}/80`" class="rounded-lg" :alt="product.name" />
+                            <img :src="`https://picsum.photos/seed/${product.id}/80`" class="rounded-lg" :alt="product.name + ' main image'" />
                             <p class="uppercase font-semibold">{{ product.name }}</p>
                         </div>
                     </td>

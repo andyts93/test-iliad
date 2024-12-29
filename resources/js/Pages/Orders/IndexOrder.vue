@@ -42,8 +42,8 @@
 </script>
 
 <template>
-    <h1 class="font-bold text-3xl mb-4">Overview</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+    <h1 class="font-bold text-xl md:text-3xl mb-2 md:mb-4">Overview</h1>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-8 mb-4 md:mb-8">
         <StatBox title="Orders" value="50" bg-class="bg-lime-100" shadow-class="shadow-lime-300" icon-class="text-lime-500">
             <ShoppingCartCheck02Icon size="100" />
         </StatBox>
@@ -53,19 +53,19 @@
         <StatBox title="Income" value="2.35M" bg-class="bg-cyan-100" shadow-class="shadow-cyan-300" icon-class="text-cyan-500">
             <MoneyReceive02Icon size="100" />
         </StatBox>
-        <StatBox title="Customers" value="1.2K" bg-class="bg-purple-100" shadow-class="shadow-purple-300" icon-class="text-purple-500">
+        <StatBox title="Clients" value="1.2K" bg-class="bg-purple-100" shadow-class="shadow-purple-300" icon-class="text-purple-500">
             <UserMultipleIcon size="100" />
         </StatBox>
     </div>
-    <h1 class="font-bold text-3xl mb-4">Orders</h1>
+    <h1 class="font-bold text-xl md:text-3xl mb-2 md:mb-4">Orders</h1>
     <form @submit="search" class="flex flex-col lg:flex-row gap-4 mb-4">
-        <input type="date" aria-label="Date" placeholder="Date" v-model="queryDate" class="rounded-full bg-white border border-gray-300 p-2 text-black focus:outline-none focus:border-gray-800" />
-        <input type="text" aria-label="Name" placeholder="Name" v-model="queryName" class="rounded-full bg-white border border-gray-300 p-2 text-black focus:outline-none focus:border-gray-800" />
-        <input type="text" aria-label="Description" placeholder="Description" v-model="queryDescription" class="rounded-full bg-white border border-gray-300 p-2 text-black focus:outline-none focus:border-gray-800" />
-        <button type="submit" class="bg-green-500 px-4 rounded-full text-white py-2" :disabled="loading">Search</button>
-        <button type="button" class="bg-red-500 px-4 py-2 rounded-full text-white" @click="reset" :disabled="loading">Reset</button>
+        <input type="date" aria-label="Date" placeholder="Date" v-model="queryDate" class="text-sm md:text-base rounded-full bg-white border border-gray-300 p-2 text-black focus:outline-none focus:border-gray-800" />
+        <input type="text" aria-label="Name" placeholder="Name" v-model="queryName" class="text-sm md:text-base rounded-full bg-white border border-gray-300 p-2 text-black focus:outline-none focus:border-gray-800" />
+        <input type="text" aria-label="Description" placeholder="Description" v-model="queryDescription" class="text-sm md:text-base rounded-full bg-white border border-gray-300 p-2 text-black focus:outline-none focus:border-gray-800" />
+        <button type="submit" class="bg-green-500 px-4 rounded-full text-white py-2 text-sm md:text-base" :disabled="loading">Search</button>
+        <button type="button" class="bg-red-500 px-4 py-2 rounded-full text-white text-sm md:text-base" @click="reset" :disabled="loading">Reset</button>
     </form>
-    <table class="w-full">
+    <table class="w-full text-sm md:text-base">
         <thead>
             <tr class="sr-only md:not-sr-only">
                 <th class="text-left p-2">ID</th>
@@ -92,15 +92,15 @@
                 </tr>
             </template>
             <tr v-else v-for="order in orders.data" :key="order.id" class="flex flex-col mb-4 sm:table-row">
-                <td class="p-2">
+                <td class="p-0 md:p-2">
                     <span class="bg-black p-2 text-white block text-center">#{{ order.id }}</span>
                 </td>
-                <td class="p-2">
+                <td class="p-0 md:p-2">
                     <router-link :to="`/orders/${order.id}`"><p class="font-bold">{{ order.name }}</p></router-link>
                     <p class="text-gray-500">{{ order.description }}</p>
                 </td>
-                <td class="p-2">{{ dayjs(order.date).format('DD/MM/YYYY') }}</td>
-                <td class="p-2 font-bold text-right">
+                <td class="p-0 md:p-2">{{ dayjs(order.date).format('DD/MM/YYYY') }}</td>
+                <td class="p-0 md:p-2 font-bold text-right">
                     <CurrencyDisplay :value="order.products_sum_price / 100" :is-plain="true" />
                 </td>
             </tr> 

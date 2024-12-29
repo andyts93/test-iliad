@@ -4,12 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Product;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/orders",
+     *     tags={"Orders"},
+     *     summary="Get list of orders",
+     *     @OA\Response(response="200", description="List of orders"),
+     * )
+     */
     public function index(Request $request)
     {
         $qb = Order::query()
@@ -28,7 +35,7 @@ class OrderController extends Controller
         
         return response()->json($qb->paginate(15));
     }
-
+    
     public function show(Order $order)
     {
         $order->load(['products']);
@@ -40,7 +47,7 @@ class OrderController extends Controller
     {
         $order->delete();
 
-        return response()->json(null);
+        return response()->json(null, 204);
     }
 
     public function addProduct(Order $order, Product $product)
@@ -48,7 +55,7 @@ class OrderController extends Controller
         if ($order->products()->find($product->id)) {
             return response()->json([
                 'error' => 'You can\'t add the same product twice',
-            ]);
+            ], 400);
         }
 
         $order->products()->attach($product->id);

@@ -58,10 +58,10 @@
     <div v-else>
         <OrderHeader :order="order" />
         <div class="flex justify-end gap-2 mb-4">
-            <router-link :to="`/orders/${order.id}/edit`" class="rounded-md bg-gray-200 p-2 hover:bg-gray-500 hover:text-white transition-colors duration-300">
+            <router-link :to="`/orders/${order.id}/edit`" class="rounded-md bg-gray-200 p-2 hover:bg-gray-500 hover:text-white transition-colors duration-300" title="Edit order">
                 <Edit02Icon />
             </router-link>
-            <button class="rounded-md bg-red-300 p-2 hover:bg-red-500 hover:text-white transition-colors duration-300" @click="delOrder">
+            <button class="rounded-md bg-red-300 p-2 hover:bg-red-500 hover:text-white transition-colors duration-300" @click="delOrder" title="Delete order">
                 <Delete01Icon />
             </button>
         </div>
@@ -71,7 +71,7 @@
                     <BorderFullIcon />
                 </template>
                 <template v-slot:body>
-                    <table class="w-full">
+                    <table class="w-full text-sm md:text-base">
                         <tbody>
                             <tr class="flex flex-col mb-4 sm:table-row">
                                 <th class="text-left align-top pr-6 font-semibold">Name</th>
