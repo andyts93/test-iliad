@@ -30,7 +30,7 @@ docker-compose up -d --build
 ```
 4. **Lancia le migration**
 ```bash
-docker exec -it iliad-test bash
+docker exec -it iliad-test sh
 php artisan migrate --seed
 ```
 5. **Avvia il server npm e php**
