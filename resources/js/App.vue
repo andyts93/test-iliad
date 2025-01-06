@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DeliveryBox01Icon } from 'hugeicons-vue';
+import { DeliveryBox01Icon, DocumentCodeIcon } from 'hugeicons-vue';
 </script>
 <template>
     <div class="flex h-screen overflow-hidden">
@@ -11,6 +11,12 @@ import { DeliveryBox01Icon } from 'hugeicons-vue';
                         <DeliveryBox01Icon />
                         <span class="hidden md:block">Orders</span>
                     </router-link>
+                </li>
+                <li>
+                    <a href="/api/documentation" target="_blank" class="flex items-center justify-center md:justify-start gap-2 px-4 py-2 hover:bg-slate-700" title="API docs">
+                        <DocumentCodeIcon />
+                        <span class="hidden md:block">API docs</span>
+                    </a>
                 </li>
             </ul>
         </div>

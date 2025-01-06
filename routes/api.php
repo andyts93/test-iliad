@@ -10,6 +10,7 @@ Route::prefix('v1')->group(function() {
     Route::get('/orders/{order}', [OrderController::class, 'show']);
     Route::delete('/orders/{order}', [OrderController::class, 'destroy']);
     Route::put('/orders/{order}', [OrderController::class, 'update']);
+    Route::post('/orders', [OrderController::class, 'store']);
 
     Route::post('/orders/{order}/products/{product}', [OrderController::class, 'addProduct']);
     Route::delete('/orders/{order}/products/{product}', [OrderController::class, 'removeProduct']);

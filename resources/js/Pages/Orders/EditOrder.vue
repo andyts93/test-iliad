@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import dayjs from 'dayjs';
 import { onMounted, Ref, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { BorderFullIcon } from 'hugeicons-vue';
@@ -27,11 +26,13 @@ const loadOrder = () => {
 
 const save = async (e) => {
     e.preventDefault();
+    loading.value = true;
     updateOrder(Number(route.params.id), {
         name: order.value?.name,
         description: order.value?.description,
     })
-        .then(response => toast.success(response.data.message));
+        .then(response => toast.success(response.data.message))
+        .finally(() => loading.value = false);
 }
 
 onMounted(() => {
@@ -57,7 +58,7 @@ watch(searchedProduct, newVal => {
             <SkeletonLoader class="h-96 rounded-xl" />
         </div>
     </div>
-    <div v-else>
+    <div v-else-if="order">
         <OrderHeader :order="order" />
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 mb-4">
             <Card title="Details">

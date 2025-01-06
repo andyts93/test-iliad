@@ -5,5 +5,5 @@ export default interface Order {
     name: string;
     description: string;
     date: string;
-    products?: Product[]
+    products: Product[]
 }

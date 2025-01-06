@@ -65,7 +65,7 @@ const hasError = computed(() => error.value);
         </div>
         <p v-if="hasError" class="text-red-500">{{ error }}</p>
         <ul v-if="resultsOpen && products.length > 0" class="absolute right-0 top-10 bg-gray-50 shadow-md min-w-full mt-1 rounded-xl overflow-hidden">
-            <li v-for="product in products" :key="product.id" class="px-4 py-0.5 flex justify-between gap-8 items-center cursor-pointer hover:bg-gray-300" @click="selectProduct(product)" @keypress="selectProduct(product)">
+            <li v-for="product in products" :key="product.id" class="px-4 py-0.5 flex justify-between gap-8 items-center cursor-pointer hover:bg-gray-300" @click="selectProduct(product)">
                 <span class="">{{ product.name }}</span>
                 <span class="text-xs text-gray-500"><CurrencyDisplay :value="product.price" /></span>
             </li>

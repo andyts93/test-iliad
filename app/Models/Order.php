@@ -13,6 +13,7 @@ class Order extends Model
     protected $fillable = [
         'name',
         'description',
+        'date',
     ];
     
     public $timestamps = false;

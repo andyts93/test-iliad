@@ -1,3 +1,4 @@
+import { UnsavedOrder } from '../interfaces/UnsavedOrder';
 import axiosInstance from './axios-instance';
 
 const API_BASE = '/api/v1/orders';
@@ -7,6 +8,8 @@ export const getOrders = (queryParams: { name?: string, description?: string, da
 });
 
 export const getOrder = (id: number) => axiosInstance.get(`${API_BASE}/${id}`);
+
+export const createOrder = (order: UnsavedOrder) => axiosInstance.post(API_BASE, order);
 
 export const updateOrder = (id: number, params: { name?: string, description?: string }) => axiosInstance.put(`${API_BASE}/${id}`, params);
 

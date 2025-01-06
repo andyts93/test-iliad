@@ -42,6 +42,12 @@ namespace App\Http\Controllers;
  *         )
  *     )
  * )
+ * 
+ * @OA\Schema(
+ *   schema="NotFoundError",
+ *   title="Sample schema for 404 error",
+ *   @OA\Property(property="error", type="string", example="Record not found")
+ * )
  */
 abstract class Controller
 {

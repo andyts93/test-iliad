@@ -41,6 +41,63 @@ class OrderTest extends TestCase
         ]);
     }
 
+    public function testCreateOrder()
+    {
+        $products = Product::factory(3)->create();
+
+        $response = $this->postJson('/api/v1/orders', [
+            'name' => 'Test',
+            'description' => 'test',
+            'products' => $products,
+        ]);
+
+        $response->assertCreated();
+        $response->assertJson([
+            'message' => 'Order created successfully',
+        ]);
+
+        $this->assertDatabaseHas('orders', [
+            'name' => 'Test',
+            'description' => 'test',
+        ]);
+    }
+
+    public function testCreateOrderNonExistingProducts()
+    {
+        $response = $this->postJson('/api/v1/orders', [
+            'name' => 'Test',
+            'description' => 'test',
+            'products' => [['id' => 123456], ['id' => 234567]]
+        ]);
+
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors(['products.0', 'products.1']);
+    }
+
+    public function testCreateOrderNonMissingProducts()
+    {
+        $response = $this->postJson('/api/v1/orders', [
+            'name' => 'Test',
+            'description' => 'test',
+            'products' => []
+        ]);
+
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors(['products']);
+    }
+
+    public function testCreateOrderNonMissingFields()
+    {
+        $response = $this->postJson('/api/v1/orders', [
+            'name' => '',
+            'description' => '',
+            'products' => []
+        ]);
+
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors(['name', 'description', 'products']);
+    }
+
     public function testDestroyDeletesOrder()
     {
         $order = Order::factory()->create();

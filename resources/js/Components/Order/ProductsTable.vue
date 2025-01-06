@@ -31,10 +31,15 @@ const deleteProduct = async (product: Product) => {
         confirmButtonColor: '#FF0000'
     });
     if (result.isConfirmed) {
-        removeProductOrder(Number(props.order?.id), product.id).then(response => {
-            toast.success(response.data.message);
+        if (props.order) {
+            removeProductOrder(Number(props.order?.id), product.id).then(response => {
+                toast.success(response.data.message);
+                emit('removed', product.id);
+            });
+        }
+        else {
             emit('removed', product.id);
-        });
+        }
     }
 }
 

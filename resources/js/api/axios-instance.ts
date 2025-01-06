@@ -15,7 +15,11 @@ instance.interceptors.response.use(
                 errMsg = error.response.data.error;
             }
             else if (error.response.data.errors) {
-                errMsg = error.response.data.errors.join(',');
+                const errors: string[] = [];
+                for (const key in error.response.data.errors) {
+                    errors.push(error.response.data.errors[key]);
+                }
+                errMsg = errors.join(',');
             }
         }
         else {

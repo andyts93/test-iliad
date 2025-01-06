@@ -10,6 +10,10 @@ const routes = [
         component: () => import('./Pages/Orders/ShowOrder.vue'),
     },
     {
+        path: '/orders/create',
+        component: () => import('./Pages/Orders/CreateOrder.vue'),
+    },
+    {
         path: '/orders/:id/edit',
         component: () => import('./Pages/Orders/EditOrder.vue'),
     },
