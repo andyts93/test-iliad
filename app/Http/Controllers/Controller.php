@@ -44,6 +44,14 @@ namespace App\Http\Controllers;
  * )
  * 
  * @OA\Schema(
+ *   schema="Product",
+ *   title="Sample schema for products",
+ *   @OA\Property(property="id", type="integer", example=1),
+ *   @OA\Property(property="name", type="string", example="Lorem ipsum"),
+ *   @OA\Property(property="price", type="integer", example=10000)
+ * )
+ * 
+ * @OA\Schema(
  *   schema="NotFoundError",
  *   title="Sample schema for 404 error",
  *   @OA\Property(property="error", type="string", example="Record not found")

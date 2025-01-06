@@ -22,6 +22,32 @@
                 ],
                 "summary": "Get list of orders",
                 "operationId": "325fd3d55bbe9bb39645269928fa4983",
+                "parameters": [
+                    {
+                        "name": "date",
+                        "in": "query",
+                        "description": "Date filter",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name filter",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "Description filter",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "List of orders",
@@ -390,6 +416,40 @@
                     }
                 }
             }
+        },
+        "/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get list of products",
+                "operationId": "c1ff6f862214e1896c59cfe0491ce0e8",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Name filter",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of products",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Product"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -454,6 +514,24 @@
                 },
                 "type": "object"
             },
+            "Product": {
+                "title": "Sample schema for products",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Lorem ipsum"
+                    },
+                    "price": {
+                        "type": "integer",
+                        "example": 10000
+                    }
+                },
+                "type": "object"
+            },
             "NotFoundError": {
                 "title": "Sample schema for 404 error",
                 "properties": {
@@ -470,6 +548,10 @@
         {
             "name": "Orders",
             "description": "Orders"
+        },
+        {
+            "name": "Products",
+            "description": "Products"
         }
     ]
 }

@@ -17,6 +17,24 @@ class OrderController extends Controller
      *     path="/orders",
      *     tags={"Orders"},
      *     summary="Get list of orders",
+     *     @OA\Parameter(
+     *       name="date",
+     *       in="query",
+     *       description="Date filter",
+     *       @OA\Schema(type="string")
+     *     ),
+     *      @OA\Parameter(
+     *       name="name",
+     *       in="query",
+     *       description="Name filter",
+     *       @OA\Schema(type="string")
+     *     ),
+     *      @OA\Parameter(
+     *       name="description",
+     *       in="query",
+     *       description="Description filter",
+     *       @OA\Schema(type="string")
+     *     ),
      *     @OA\Response(response="200", description="List of orders", @OA\JsonContent(
      *         @OA\Property(property="current_page", type="integer", example=1),
      *         @OA\Property(property="total", type="integer", example=100),

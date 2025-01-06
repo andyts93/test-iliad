@@ -2,7 +2,7 @@
     import { ref, onMounted } from 'vue';
     import dayjs from 'dayjs';
     import CurrencyDisplay from '../../Components/CurrencyDisplay.vue';
-    import { ShoppingCartCheck02Icon, DeliveryBox01Icon, MoneyReceive02Icon, UserMultipleIcon } from 'hugeicons-vue';
+    import { ShoppingCartCheck02Icon, DeliveryBox01Icon, MoneyReceive02Icon, UserMultipleIcon, Add02Icon } from 'hugeicons-vue';
     import StatBox from '../../Components/StatBox.vue';
     import { getOrders } from '../../api/orders';
     import SkeletonLoader from '../../Components/SkeletonLoader.vue';
@@ -58,13 +58,16 @@
         </StatBox>
     </div>
     <h1 class="font-bold text-xl md:text-3xl mb-2 md:mb-4">Orders</h1>
-    <form @submit="search" class="flex flex-col lg:flex-row gap-4 mb-4">
-        <input type="date" aria-label="Date" placeholder="Date" v-model="queryDate" class="text-sm md:text-base rounded-full bg-white border border-gray-300 p-2 text-black focus:outline-none focus:border-gray-800" />
-        <input type="text" aria-label="Name" placeholder="Name" v-model="queryName" class="text-sm md:text-base rounded-full bg-white border border-gray-300 p-2 text-black focus:outline-none focus:border-gray-800" />
-        <input type="text" aria-label="Description" placeholder="Description" v-model="queryDescription" class="text-sm md:text-base rounded-full bg-white border border-gray-300 p-2 text-black focus:outline-none focus:border-gray-800" />
-        <button type="submit" class="bg-green-500 px-4 rounded-full text-white py-2 text-sm md:text-base" :disabled="loading">Search</button>
-        <button type="button" class="bg-red-500 px-4 py-2 rounded-full text-white text-sm md:text-base" @click="reset" :disabled="loading">Reset</button>
-    </form>
+    <div class="flex justify-between items-center mb-4">
+        <form @submit="search" class="flex flex-col lg:flex-row gap-4">
+            <input type="date" aria-label="Date" placeholder="Date" v-model="queryDate" class="cst-input" />
+            <input type="text" aria-label="Name" placeholder="Name" v-model="queryName" class="cst-input" />
+            <input type="text" aria-label="Description" placeholder="Description" v-model="queryDescription" class="cst-input" />
+            <button type="submit" class="btn btn-success" :disabled="loading">Search</button>
+            <button type="button" class="btn btn-danger" @click="reset" :disabled="loading">Reset</button>
+        </form>
+        <router-link to="/orders/create" class="btn btn-success" title="Create new order"><Add02Icon /> <span class="sr-only">Create new</span></router-link>
+    </div>
     <table class="w-full text-sm md:text-base">
         <thead>
             <tr class="sr-only md:not-sr-only">

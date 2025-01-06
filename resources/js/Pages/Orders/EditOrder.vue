@@ -69,14 +69,14 @@ watch(searchedProduct, newVal => {
                     <form @submit="save">
                         <div class="flex flex-col lg:flex-row justify-between mb-4 gap-2">
                             <span>Name</span>
-                            <input aria-label="Name" type="text" v-model="order.name" class="rounded-full bg-white border border-gray-300 px-4 py-2 text-black focus:outline-none focus:border-gray-800" />
+                            <input aria-label="Name" type="text" v-model="order.name" class="cst-input" />
                         </div>
                         <div class="flex flex-col lg:flex-row justify-between mb-4 gap-2">
                             <span>Description</span>
                             <textarea aria-label="Description" v-model="order.description" class="rounded-2xl bg-white border border-gray-300 px-4 py-2 text-black focus:outline-none focus:border-gray-800 w-full xl:min-w-96" rows="5"></textarea>
                         </div>
                         <div class="flex justify-end">
-                            <button type="submit" class="bg-green-500 px-4 rounded-full text-white py-2 hover:bg-green-400 transition-colors duration-300">Save</button>
+                            <button type="submit" class="btn btn-success">Save</button>
                         </div>
                     </form>
                 </template>

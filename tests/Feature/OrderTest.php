@@ -71,7 +71,7 @@ class OrderTest extends TestCase
         ]);
 
         $response->assertStatus(422);
-        $response->assertJsonValidationErrors(['products.0', 'products.1']);
+        $response->assertJsonValidationErrors(['products.0.id', 'products.1.id']);
     }
 
     public function testCreateOrderNonMissingProducts()

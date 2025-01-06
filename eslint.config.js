@@ -3,6 +3,7 @@ import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 import pluginVue from "eslint-plugin-vue";
 import pluginVueA11y from "eslint-plugin-vuejs-accessibility";
+import eslintConfigPrettier from "eslint-config-prettier";
 
 
 /** @type {import('eslint').Linter.Config[]} */
@@ -14,4 +15,5 @@ export default [
   ...pluginVue.configs["flat/essential"],
   ...pluginVueA11y.configs["flat/recommended"],
   {files: ["**/*.vue"], languageOptions: {parserOptions: {parser: tseslint.parser}}},
+  eslintConfigPrettier,
 ];

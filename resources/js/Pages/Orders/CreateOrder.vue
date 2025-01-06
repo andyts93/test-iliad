@@ -56,7 +56,7 @@ const isOrderValid = computed(() => Boolean(order.value.name && order.value.desc
                 </button>
                 <h1 class="font-bold text-xl lg:text-3xl">New order</h1>
             </div>
-            <button type="button" class="bg-green-500 px-4 rounded-full text-white py-2 hover:bg-green-400 transition-colors duration-300 disabled:opacity-50" @click="save" :disabled="!isOrderValid">Save</button>
+            <button type="button" class="btn btn-success" @click="save" :disabled="!isOrderValid">Save</button>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 mb-4">
             <Card title="Details">
@@ -66,7 +66,7 @@ const isOrderValid = computed(() => Boolean(order.value.name && order.value.desc
                 <template v-slot:body>
                     <div class="flex flex-col lg:flex-row justify-between mb-4 gap-2 lg:gap-4">
                         <span>Name</span>
-                        <input aria-label="Name" type="text" v-model="order.name" class="rounded-full bg-white border border-gray-300 px-4 py-2 text-black focus:outline-none focus:border-gray-800" />
+                        <input aria-label="Name" type="text" v-model="order.name" class="cst-input" />
                     </div>
                     <div class="flex flex-col lg:flex-row justify-between mb-4 gap-2 lg:gap-4">
                         <span>Description</span>

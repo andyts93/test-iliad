@@ -7,6 +7,23 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/products",
+     *     tags={"Products"},
+     *     summary="Get list of products",
+     *     @OA\Parameter(
+     *       name="q",
+     *       in="query",
+     *       description="Name filter",
+     *       @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(response="200", description="List of products", @OA\JsonContent(
+     *       type="array",
+     *       @OA\Items(ref="#/components/schemas/Product")
+     *     )),
+     * )
+     */
     public function index(Request $request)
     {
         $qb = Product::query();

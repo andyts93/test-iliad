@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .cst-input {
+        @apply rounded-full bg-white border border-gray-300 px-4 py-2 text-black focus:outline-none focus:border-gray-800 text-sm md:text-base;
+    }
+    .btn {
+        @apply px-4 py-2 rounded-full transition-colors duration-300 disabled:opacity-50 text-sm md:text-base;
+    }
+    .btn-success {
+        @apply bg-green-500 hover:bg-green-400 text-white;
+    }
+    .btn-danger {
+        @apply bg-red-500 hover:bg-red-400 text-white;
+    }
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 5px;
