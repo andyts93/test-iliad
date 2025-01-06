@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { onMounted, ref } from 'vue';
+    import { onMounted, Ref, ref } from 'vue';
     import { useRoute, useRouter } from 'vue-router';
     import { BorderFullIcon, Edit02Icon, Delete01Icon } from 'hugeicons-vue';
     import Swal from 'sweetalert2';
@@ -9,10 +9,11 @@
     import { getOrder, deleteOrder } from '../../api/orders';
     import SkeletonLoader from '../../Components/SkeletonLoader.vue';
     import OrderHeader from '../../Components/Order/OrderHeader.vue';
+    import Order from '../../interfaces/Order';
 
     const route = useRoute();
     const router = useRouter();
-    const order = ref();
+    const order: Ref<Order | undefined> = ref();
     const loading = ref(true);
 
     const delOrder = async () => {
@@ -55,7 +56,7 @@
             <SkeletonLoader class="h-96 rounded-xl" />
         </div>
     </div>
-    <div v-else>
+    <div v-else-if="order">
         <OrderHeader :order="order" />
         <div class="flex justify-end gap-2 mb-4">
             <router-link :to="`/orders/${order.id}/edit`" class="rounded-md bg-gray-200 p-2 hover:bg-gray-500 hover:text-white transition-colors duration-300" title="Edit order">

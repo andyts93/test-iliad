@@ -3,7 +3,7 @@ import axiosInstance from './axios-instance';
 
 const API_BASE = '/api/v1/orders';
 
-export const getOrders = (queryParams: { name?: string, description?: string, date?: string }) => axiosInstance.get(API_BASE, {
+export const getOrders = (queryParams: { name?: string, description?: string, date?: string, page: number }) => axiosInstance.get(API_BASE, {
     params: queryParams,
 });
 
