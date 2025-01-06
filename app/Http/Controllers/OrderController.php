@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -14,10 +15,23 @@ class OrderController extends Controller
      *     path="/orders",
      *     tags={"Orders"},
      *     summary="Get list of orders",
-     *     @OA\Response(response="200", description="List of orders"),
+     *     @OA\Response(response="200", description="List of orders", @OA\JsonContent(
+     *         @OA\Property(property="current_page", type="integer", example=1),
+     *         @OA\Property(property="total", type="integer", example=100),
+     *         @OA\Property(property="per_page", type="integer", example=15),
+     *         @OA\Property(property="last_page", type="integer", example=7),
+     *         @OA\Property(property="from", type="integer", example=1),
+     *         @OA\Property(property="to", type="integer", example=15),
+     *         @OA\Property(
+     *             property="data",
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Order"))
+     *         ),
+     *         
+     *     )),
      * )
      */
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
         $qb = Order::query()
             ->with('products')
@@ -36,21 +50,120 @@ class OrderController extends Controller
         return response()->json($qb->paginate(15));
     }
     
-    public function show(Order $order)
+
+    /**
+     * @OA\Get(
+     *   path="/order/{order}",
+     *   tags={"Orders"},
+     *   summary="Get a single order",
+     *   @OA\Parameter(
+     *     name="order",
+     *     in="path",
+     *     description="Order ID",
+     *     required=true,
+     *     @OA\Schema(type="integer")
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Order details retrieved successfuly",
+     *     @OA\JsonContent(ref="#/components/schemas/Order")
+     *   ),
+     *   @OA\Response(
+     *     response=404,
+     *     description="Order not found",
+     *     @OA\JsonContent(
+     *       type="object",
+     *       @OA\Property(property="error", type="string", example="Record not found")
+     *     )
+     *   )
+     * )
+     */
+    public function show(Order $order): JsonResponse
     {
         $order->load(['products']);
         
         return response()->json($order);
     }
 
-    public function destroy(Order $order)
+    /**
+     * @OA\Delete(
+     *   path="/order/{order}",
+     *   tags={"Orders"},
+     *   summary="Delete a single order",
+     *   @OA\Parameter(
+     *     name="order",
+     *     in="path",
+     *     description="Order ID",
+     *     required=true,
+     *     @OA\Schema(type="integer")
+     *   ),
+     *   @OA\Response(
+     *     response=204,
+     *     description="Order deleted successfuly",
+     *   ),
+     *   @OA\Response(
+     *     response=404,
+     *     description="Order not found",
+     *     @OA\JsonContent(
+     *       type="object",
+     *       @OA\Property(property="error", type="string", example="Record not found")
+     *     )
+     *   )
+     * )
+     */
+    public function destroy(Order $order): JsonResponse
     {
         $order->delete();
 
         return response()->json(null, 204);
     }
 
-    public function addProduct(Order $order, Product $product)
+    /**
+     * @OA\Put(
+     *   path="/order/{order}/products/{product}",
+     *   tags={"Orders"},
+     *   summary="Add a product to an order",
+     *   @OA\Parameter(
+     *     name="order",
+     *     in="path",
+     *     description="Order ID",
+     *     required=true,
+     *     @OA\Schema(type="integer")
+     *   ),
+     *   @OA\Parameter(
+     *     name="product",
+     *     in="path",
+     *     description="Product ID",
+     *     required=true,
+     *     @OA\Schema(type="integer")
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Product added successfuly",
+     *     @OA\JsonContent(
+     *       type="object",
+     *       @OA\Property(property="message", type="string", example="Product added successfully")
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response=404,
+     *     description="Order or product not found",
+     *     @OA\JsonContent(
+     *       type="object",
+     *       @OA\Property(property="error", type="string", example="Record not found")
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response=400,
+     *     description="Duplicated product",
+     *     @OA\JsonContent(
+     *       type="object",
+     *       @OA\Property(property="error", type="string", example="You can't add the same product twice")
+     *     )
+     *   )
+     * )
+     */
+    public function addProduct(Order $order, Product $product): JsonResponse
     {
         if ($order->products()->find($product->id)) {
             return response()->json([
@@ -65,7 +178,52 @@ class OrderController extends Controller
         ]); 
     }
 
-    public function removeProduct(Order $order, Product $product)
+    /**
+     * @OA\Delete(
+     *   path="/order/{order}/products/{product}",
+     *   tags={"Orders"},
+     *   summary="Remove a product from an order",
+     *   @OA\Parameter(
+     *     name="order",
+     *     in="path",
+     *     description="Order ID",
+     *     required=true,
+     *     @OA\Schema(type="integer")
+     *   ),
+     *   @OA\Parameter(
+     *     name="product",
+     *     in="path",
+     *     description="Product ID",
+     *     required=true,
+     *     @OA\Schema(type="integer")
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Product removed successfuly",
+     *     @OA\JsonContent(
+     *       type="object",
+     *       @OA\Property(property="message", type="string", example="Product removed successfully")
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response=404,
+     *     description="Order or product not found",
+     *     @OA\JsonContent(
+     *       type="object",
+     *       @OA\Property(property="error", type="string", example="Record not found")
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response=400,
+     *     description="Productless order",
+     *     @OA\JsonContent(
+     *       type="object",
+     *       @OA\Property(property="error", type="string", example="An order must have at least 1 product")
+     *     )
+     *   )
+     * )
+     */
+    public function removeProduct(Order $order, Product $product): JsonResponse
     {
         if ($order->products()->count() <= 1) {
             return response()->json([
@@ -79,7 +237,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function update(Request $request, Order $order)
+    public function update(Request $request, Order $order): JsonResponse
     {
         $validated = $request->validate([
             'name' => 'required|max:255',
