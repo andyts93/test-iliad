@@ -33,8 +33,8 @@ docker-compose up -d --build
 docker exec -it iliad-test sh
 php artisan migrate --seed
 ```
-5. **Avvia il server npm e php**
+5. **Avvia il server npm e php (fuori dal container)**
 ```bash
 php artisan serve
-npm run serve
+npm run dev
 ```
